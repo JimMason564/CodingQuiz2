@@ -2,8 +2,6 @@
 var sectionID
 var start = document.getElementById("start")
 var timer = document.getElementById("time")
-var initialsBtN = document.querySelector("initials")
-var userScore 
 var time = 20
 var countdown;
 var intro = document.getElementById("intro")
@@ -15,6 +13,8 @@ var questContainer= document.getElementById("questions")
 var endSubmit= document.getElementById("irr")
 var greenMonster= document.getElementById("scoreboard")
 var enterIn= document.getElementById("submit")
+var wilson= document.getElementById("seahawks")
+// var useIn= document.getElementById("userInput")
 
 var questions = [
     {
@@ -109,17 +109,17 @@ function gameOver() {
     document.getElementById("finalScore").textContent = time;
  
 
-var initials= userInput.value.trim()
-var highScores= JSON.parse(localStorage.getItem("highscores")) || [];
+var initials= document.querySelector("input").value;
+var highscores= JSON.parse(localStorage.getItem("highscores")) || [];
 var newScore= {score:time, initials:initials }
-highScores.push(newScore);
-localStorage.setItem("highScores",JSON.stringify(highScores))
+highscores.push(newScore);
+localStorage.setItem("highscores",JSON.stringify(highscores))
 }
 
 function leaderboard() {
-    var highScores= JSON.parse(localStorage.getItem("highscores")) || [];
-    highScores.sort(function(a, b) {return b.score - a.score});
-    highScores.forEach(function (score, index){
+    var highscores= JSON.parse(localStorage.getItem("highscores")) || [];
+    // highScores.sort(function(a, b) {return b.score - a.score});
+    highscores.forEach(function (score, index){
         var listItem= document.createElement("li")
         listItem.textContent = score.initials + " - " + score.score
         greenMonster.appendChild(listItem)
