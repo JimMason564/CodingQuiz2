@@ -1,0 +1,8 @@
+This is a multiple choice Javascript quiz game. When the start button is hit, the first question
+appears and the timer begins counting down from 30 to 0. For every incorrect question 5 seconds is
+deducted from the timer. The quiz is over when all the questions are answered or the timer hits 0.
+Your score is the time remaining. You will then have the option to enter your initials to be stored in local storage on the high score board.
+
+
+ https://jimmason564.github.io/CodingQuiz2/
+

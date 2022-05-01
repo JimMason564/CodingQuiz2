@@ -22,7 +22,7 @@ header {
     margin-right: 30px;
 }
 
-section{
+#intro, #irr{
     padding: 1em;
     position: absolute;
     top: 50%;
@@ -33,4 +33,13 @@ section{
 }
 .hide {
     display:none;
+}
+
+#questions {
+    padding: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) 
 }
