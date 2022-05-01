@@ -49,7 +49,7 @@ var questions = [
 
 //Starts quiz
 function startQuiz() {
-    countdown = setInterval(timer, 1000);
+    countdown = setInterval(timeDecrement, 1000);
     timer.textContent = time
     intro.setAttribute("class", "hide")
     showQuestion()
@@ -59,15 +59,34 @@ function showQuestion() {
     currentQuestion = questions[currentQuestionIndex];
     questionEl.textContent = currentQuestion.title;
 
+    answersEl.innerHTML=""
+
 currentQuestion.choices.forEach(function(choice,index){
     var choiceButton = document.createElement("button")
     choiceButton.setAttribute("value",choice)
     choiceButton.textContent = choice
     answersEl.appendChild(choiceButton)
+    choiceButton.onclick= checkAnswer
 })
 }
 
-function timer() {
+function checkAnswer() {
+    if (this.value !== questions[currentQuestionIndex].answer) {
+        time -= 5;
+         if (time <= 0) {
+             time=0
+         }
+         timer.textContent= time
+    }
+    if (currentQuestionIndex === questions.length) {
+        gameOver()
+    }
+    else {
+        currentQuestionIndex++;
+        showQuestion();
+    }
+}
+function timeDecrement() {
     time--;
     timer.textContent = time;
     if (time <= 0) {
@@ -77,36 +96,8 @@ function timer() {
 
 start.onclick = startQuiz
 
-//If right add point, else wrong take time off timer
-function confirm(answer) {
-
-    if (questions[text].correct === true[questionIndex].text[answer]) {
-        score++;
-        answerCheck.textContent = "You got it!";
-    } else {
-        time -= 5;
-        timeLeft.textContent = totalTime;
-        answerCheck.textContent = "Wrong!"
-    }
     //Time out, quiz over
     function gameOver() {
-
-
-        // show final score
-        userScore.textContent = score;
+        clearInterval(countdown);
+        console.log("done")
     }
-    //Form for high score
-    initalsBtn.addEventListener("click", function () {
-        let initValue = initials.value();
-        if (initValue) {
-            let userScore = { username: initValue, userScore: score };
-            initialsEl.value = '';
-            highScores = JSON.parse(localStorage.getItem("scores")) || [];
-            highScores.push(userScore)
-            localStorage.setItem("scores", JSON.stringify(highScores));
-            hide(highScores);
-            renderHighScores();
-
-        }
-    })
-}
