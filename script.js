@@ -3,14 +3,17 @@ var sectionID
 var start = document.getElementById("start")
 var timer = document.getElementById("time")
 var initialsBtN = document.querySelector("initials")
-var userScore = document.getElementById("scores")
+var userScore 
 var highScores = document.querySelector("high score")
 var time = 20
 var countdown;
 var intro = document.getElementById("intro")
-var currentQuestionIndex= 0
-var questionEl= document.getElementById("questText")
-var answersEl= document.getElementById("answers")
+var currentQuestionIndex = 0
+var questionEl = document.getElementById("questText")
+var answersEl = document.getElementById("answers")
+var done = document.getElementById("finished")
+var questContainer= document.getElementById("questions")
+var endSubmit= document.getElementById("irr")
 
 var questions = [
     {
@@ -59,24 +62,24 @@ function showQuestion() {
     currentQuestion = questions[currentQuestionIndex];
     questionEl.textContent = currentQuestion.title;
 
-    answersEl.innerHTML=""
+    answersEl.innerHTML = ""
 
-currentQuestion.choices.forEach(function(choice,index){
-    var choiceButton = document.createElement("button")
-    choiceButton.setAttribute("value",choice)
-    choiceButton.textContent = choice
-    answersEl.appendChild(choiceButton)
-    choiceButton.onclick= checkAnswer
-})
+    currentQuestion.choices.forEach(function (choice, index) {
+        var choiceButton = document.createElement("button")
+        choiceButton.setAttribute("value", choice)
+        choiceButton.textContent = choice
+        answersEl.appendChild(choiceButton)
+        choiceButton.onclick = checkAnswer
+    })
 }
 
 function checkAnswer() {
     if (this.value !== questions[currentQuestionIndex].answer) {
         time -= 5;
-         if (time <= 0) {
-             time=0
-         }
-         timer.textContent= time
+        if (time < 0) {
+            time = 0
+        }
+        timer.textContent = time
     }
     currentQuestionIndex++;
     if (currentQuestionIndex === questions.length) {
@@ -90,13 +93,18 @@ function timeDecrement() {
     time--;
     timer.textContent = time;
     if (time <= 0) {
-        clearInterval(countdown);
+        gameOver()
     }
 }
 
 start.onclick = startQuiz
 
-    //Time out, quiz over
-    function gameOver() {
-        clearInterval(countdown);
-    }
+//Time out, quiz over
+function gameOver() {
+    clearInterval(countdown);
+    questContainer.setAttribute("class", "hide")
+    endSubmit.classList.remove("hide")
+    done.textContent= "Game Over";
+    document.getElementById("finalScore").textContent = time;
+   
+}
