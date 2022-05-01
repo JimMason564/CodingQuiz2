@@ -1,0 +1,36 @@
+
+
+header {
+    display:flex;
+    background-color:#4D148C;
+    opacity: .8;
+    padding: 70px;
+}
+
+.highScores {
+    position: relative;
+    left: 0;
+    margin: 10px;
+}
+
+.timer {
+    position:absolute;
+    color:#FF6600;
+    font-weight: 800;
+    font-size: large;
+    right: 0;
+    margin-right: 30px;
+}
+
+section{
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+    
+}
+.hide {
+    display:none;
+}
