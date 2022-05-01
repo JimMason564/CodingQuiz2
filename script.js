@@ -3,7 +3,7 @@ var sectionID
 var start = document.getElementById("start")
 var timer = document.getElementById("time")
 var initialsBtN = document.querySelector("initials")
-var userScore = document.querySelector("score")
+var userScore = document.getElementById("scores")
 var highScores = document.querySelector("high score")
 var time = 20
 var countdown;
@@ -78,11 +78,11 @@ function checkAnswer() {
          }
          timer.textContent= time
     }
+    currentQuestionIndex++;
     if (currentQuestionIndex === questions.length) {
         gameOver()
     }
     else {
-        currentQuestionIndex++;
         showQuestion();
     }
 }
@@ -99,5 +99,4 @@ start.onclick = startQuiz
     //Time out, quiz over
     function gameOver() {
         clearInterval(countdown);
-        console.log("done")
     }
